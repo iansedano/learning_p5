@@ -1,6 +1,4 @@
-function setup() {
-    createCanvas(600, 400);
-}
+
 
 class ball {
 	constructor(x, y, locIncrement, diameter) {
@@ -30,18 +28,22 @@ class ball {
 var locIncrement = 3;
 var dia = 50;
 
-function rand() {
-	return p5.prototype.random(50, 350)
+h = 600
+w = 400
+
+function randx() {
+	return p5.prototype.random(dia, w-dia)
+}
+function randy() {
+	return p5.prototype.random(dia, h-dia)
 }
 
-
-
-var ball1 = new ball(rand(), rand(), locIncrement, dia)
-var ball2 = new ball(rand(), rand(), locIncrement, dia)
-var ball3 = new ball(rand(), rand(), locIncrement, dia)
-var ball4 = new ball(rand(), rand(), locIncrement, dia)
-var ball5 = new ball(rand(), rand(), locIncrement, dia)
-var ball6 = new ball(rand(), rand(), locIncrement, dia)
+var ball1 = new ball(randx(), randy(), locIncrement, dia)
+var ball2 = new ball(randx(), randy(), -locIncrement, dia)
+var ball3 = new ball(randx(), randy(), locIncrement, dia)
+var ball4 = new ball(randx(), randy(), locIncrement, dia)
+var ball5 = new ball(randx(), randy(), -locIncrement, dia)
+var ball6 = new ball(randx(), randy(), -locIncrement, dia)
 
 var ballList = {
 1: ball1,
@@ -50,6 +52,10 @@ var ballList = {
 4: ball4,
 5: ball5,
 6: ball6,
+}
+
+function setup() {
+    createCanvas(h, w);
 }
 
 function draw() { // code inside draw() is automatically looped forever
