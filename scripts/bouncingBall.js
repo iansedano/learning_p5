@@ -1,9 +1,9 @@
 class ball {
-    constructor(x, y, locIncrement, diameter) {
+    constructor(x, y, xlocIncrement, ylocIncrement, diameter) {
         this.x = x;
         this.y = y;
-        this.xlocIncrement = locIncrement;
-        this.ylocIncrement = locIncrement;
+        this.xlocIncrement = xlocIncrement;
+        this.ylocIncrement = ylocIncrement;
         this.dia = diameter;
     }
 
@@ -30,21 +30,26 @@ w = 600
 h = 400
 
 function randx() {
-
     return p5.prototype.random(dia, (w - dia))
 }
-
 function randy() {
     return p5.prototype.random(dia, (h - dia))
 }
+function randloc() {
+    return p5.prototype.random(-1, 1)
+}
 
-numberOfBalls = 20
+
+numberOfBalls = 100  // MAX 100
 
 var ballList = {}
-
 for (var i = 1; i <= numberOfBalls; i++) {
-    ballList[i] = new ball(randx(), randy(), locIncrement, dia)
+    ballList[i] = new ball(randx(), randy(), randloc(), randloc(), dia)
 }
+
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// +++++++++++++++++++++++++++ DRAWING +++++++++++++++++++++++++++++
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 function setup() {
     createCanvas(w, h);
