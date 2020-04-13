@@ -1,10 +1,10 @@
 class ball {
-    constructor(x, y, xlocIncrement, ylocIncrement, diameter) {
-        this.x = x;
-        this.y = y;
-        this.xlocIncrement = xlocIncrement;
-        this.ylocIncrement = ylocIncrement;
+    constructor(diameter) {
         this.dia = diameter;
+        this.x = randx(this);
+        this.y = randy(this);
+        this.xlocIncrement = randloc();
+        this.ylocIncrement = randloc();
     }
 
     checkDirection() {
@@ -23,28 +23,35 @@ class ball {
     }
 }
 
-var locIncrement = 3;
-var dia = 50;
-
+// CANVAS SIZE
 w = 600
 h = 400
 
-function randx() {
-    return p5.prototype.random(dia, (w - dia))
+
+// RANDOM GENERATORS
+function randdia() {
+    return p5.prototype.random(5, 50)
 }
-function randy() {
-    return p5.prototype.random(dia, (h - dia))
+
+function randx(ball) {
+    return p5.prototype.random(ball.dia, (w - ball.dia))
 }
+
+function randy(ball) {
+    return p5.prototype.random(ball.dia, (h - ball.dia))
+}
+
 function randloc() {
-    return p5.prototype.random(-1, 1)
+    return p5.prototype.random(-0.5, 0.5)
 }
 
+// CREATING LIST OF BALLS
 
-numberOfBalls = 100  // MAX 100
+numberOfBalls = 200 // MAX 100
 
 var ballList = {}
 for (var i = 1; i <= numberOfBalls; i++) {
-    ballList[i] = new ball(randx(), randy(), randloc(), randloc(), dia)
+    ballList[i] = new ball(randdia())
 }
 
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -55,16 +62,20 @@ function setup() {
     createCanvas(w, h);
 }
 
-function draw() { // code inside draw() is automatically looped forever
+function draw() {
 
     background(78);
-
     stroke(255);
     strokeWeight(4);
     noFill();
 
     for (var i = 1; i <= numberOfBalls; i++) {
-        ellipse(ballList[i].x, ballList[i].y, ballList[i].dia, ballList[i].dia)
+        ellipse(
+            ballList[i].x,
+            ballList[i].y,
+            ballList[i].dia,
+            ballList[i].dia
+        )
         ballList[i].checkDirection()
         ballList[i].move()
     }
